@@ -8,14 +8,18 @@ interface User {
   active: boolean;
 }
 
-function generateSummary(users) {
-
+function generateSummary(users: User[]): void {
+  const newUsers = users.filter((user) => user.active === true);
+  const activeCount = newUsers.length;
+  const averageAge =
+    newUsers.reduce((acc, curr) => acc + curr.age, 0) / activeCount;
+  console.log(`{ activeCount:${activeCount}, averageAge: ${averageAge} }`);
 }
 
 // Expected output:
 generateSummary([
   { name: "Alice", age: 30, active: true },
   { name: "Bob", age: 25, active: false },
-  { name: "Charlie", age: 35, active: true }
-])
+  { name: "Charlie", age: 35, active: true },
+]);
 // { activeCount: 2, averageAge: 32.5 }
